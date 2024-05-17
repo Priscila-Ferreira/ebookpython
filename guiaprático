@@ -1,0 +1,63 @@
+O ebook "Meu primeiro guia prático em Python" foi realizado com o objetivo de simplificar e facilitar processos no contexto bancário por meio da automação com Python. Para isso, foram desenvolvidos três scripts Python que abordam diferentes aspectos da automação: geração de relatórios financeiros, notificação de alertas por e-mail e análise de dados de clientes.
+
+O código utilizado para cada script é o seguinte:
+
+Geração de Relatórios Financeiros:
+def gerar_relatorio(transacoes, nome_arquivo):
+    with open(nome_arquivo, 'w', newline='') as arquivo_csv:
+        campos = ['Data', 'Descrição', 'Valor']
+        escritor = csv.DictWriter(arquivo_csv, fieldnames=campos)
+        escritor.writeheader()
+        for transacao in transacoes:
+            escritor.writerow(transacao)
+
+# Exemplo de uso
+transacoes_bancarias = [
+    {'Data': '2024-05-17', 'Descrição': 'Compra de Mercadorias', 'Valor': 500.00},
+    {'Data': '2024-05-16', 'Descrição': 'Transferência Recebida', 'Valor': 1000.00},
+    {'Data': '2024-05-15', 'Descrição': 'Saque em Caixa Eletrônico', 'Valor': -200.00}
+]
+
+gerar_relatorio(transacoes_bancarias, 'relatorio_transacoes.csv')
+Notificação de Alertas por E-mail:
+
+import smtplib
+from email.mime.text import MIMEText
+
+def enviar_email(destinatario, assunto, mensagem):
+    servidor_smtp = 'smtp.example.com'
+    porta = 587
+    remetente = 'seuemail@example.com'
+    senha = 'suasenha'
+
+    msg = MIMEText(mensagem)
+    msg['Subject'] = assunto
+    msg['From'] = remetente
+    msg['To'] = destinatario
+
+    with smtplib.SMTP(servidor_smtp, porta) as servidor:
+        servidor.starttls()
+        servidor.login(remetente, senha)
+        servidor.send_message(msg)
+
+# Exemplo de uso
+destinatario = 'cliente@example.com'
+assunto = 'Alerta de Baixo Saldo'
+mensagem = 'Seu saldo está abaixo do limite mínimo.'
+
+enviar_email(destinatario, assunto, mensagem)
+Análise de Dados de Clientes:
+python
+Copy code
+import pandas as pd
+
+def calcular_saldo_medio(planilha):
+    df = pd.read_excel(planilha)
+    saldo_medio = df['Saldo'].mean()
+    return saldo_medio
+
+# Exemplo de uso
+saldo_medio = calcular_saldo_medio('dados_clientes.xlsx')
+print('Saldo Médio dos Clientes:', saldo_medio)
+
+Cada código foi desenvolvido com cuidado, incluindo comentários explicativos para facilitar o entendimento e a utilização por parte dos usuários. Este guia é resultado de um projeto feito em um bootcamp,uma parceria entre a Digital Innovation One (DIO), o Banco Santander e a Inteligência Artificial, visando democratizar o conhecimento e incentivar o aprendizado de tecnologia.
